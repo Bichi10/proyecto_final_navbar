@@ -1,11 +1,9 @@
 const express = require("express");
 const app = express();
 const hbs = require ('hbs');
-const router = require ('./views/alumnos');
+//const notas = require ('./views/alumnos');
 const SMTPPool = require("nodemailer/lib/smtp-pool");
-const port = 3001;
-
-
+const port = 4000;
 
 //Handlebars
 
@@ -27,21 +25,23 @@ app.use(express.urlencoded({ extended: false }));
 //Para servir contenido estático
 app.use(express.static("public"))
 
-//app.use("/", router);
-
-//app.use('./router/db');
+/*app.get("/alumnos",  (req, res) => {
+  res.render('notas')
+});
+*/
+//app.use('./router/router');
 
 app.get("/", (req, res) => {
   res.render('home',{
-    nombre: 'Mauri',
+    nombre: 'Notas',
     titulo: 'Aplicacion colegio'
   })
 });
 
-app.get("/generic", (req, res) => {
-  res.render('generic',{
-    nombre: 'Cosme Fulanito',
-    titulo: 'UTN FULL STACK '
+app.get("/usoapp", (req, res) => {
+  res.render('usoapp',{
+    nombre: 'Mauri',
+    titulo: 'uso de la aplicacion '
   })
 });
 
@@ -54,7 +54,7 @@ app.get("/formulario", (req, res) => {
 });
 
 app.get("/alumnos", (req, res) => {
-  res.sendFile(__dirname +"/public/alumnos.html")
+  res.render('alumnos')
 });
 
 app.get("/colegios", (req, res) => {

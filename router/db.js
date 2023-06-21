@@ -1,5 +1,5 @@
 const { router, Router } = require ('express');
-const router = new Router();
+const notas = new Router();
 
 const mysql = require ('mysql');
 
@@ -19,8 +19,8 @@ conn.connect((err) => {
 })
 
 // SELECT 
-router.get('/', (req, res) => {
-    let sql = "SELECT * FROM alumnos";
+router.get('/alumnos', (req, res) => {
+    let sql = "SELECT * FROM notas";
     let query = conn.query(sql, (err, results) => {
     if (err) throw err;
     res.render('alumnos', {
@@ -30,4 +30,4 @@ router.get('/', (req, res) => {
 });
  
 
-module.exports.router;
+module.exports.notas;

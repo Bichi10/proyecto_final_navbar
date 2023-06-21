@@ -1,40 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/bootstrap.css">
-    <title>Colegios</title>
+    <title>Crud </title>
+<link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
 </head>
-
 <body>
-    <h1>Colegios</h1>
-    <div class="container p 4">
-        <table>
-            <thead class="tabla">
-               
-                <th> colegios nombre</th>
 
+    <div class="container p-4" data-bg="banner2.jpg">
+        <h2> Lista alumnos</h2>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">Añadir</button>
+
+    <table class="table table-striped" id="mytable">
+          <thead>
+                <th> id Alumno</th>
+                <th> Nombre</th>
+                <th> Apellido</th>
+                <th> DNI</th>
+                <th> Colegio</th>
+                <th> curso</th>
+                <th> turno</th>
+                <th> materia </th>
+                <th> nota </th>
+                <th>Acciones</th>
             </thead>
             <tbody>
                 {{#each results}}
-                <tr>
-                
-                    <td>{{nombre_co}}</td>
-
-                    
-                      <td><a href="javascript:void(0);" class="btn btn-info edit" data-colegio="{{ colegio }}">Editar</a>
+        <tr>
+                <td> {{ id_alumno }}</td>
+                <td> {{ nombre_alumno }}</td>
+                <td> {{ apellido_alumno }}</td>
+                <td> {{ dni }}</td>
+                <td> {{ colegio }}</td>
+                <td> {{ curso }}</td>
+                <td> {{ turno }}</td>
+                <td> {{ materia }}</td>
+                <td> {{ nota }}</td>
+                <td><a href="javascript:void(0);" class="btn btn-info edit" data-id="{{ id_alumno}}" data-nombre_alumno="{{ nombre_alumno}}" data-apellido_alumno="{{ apellido_alumno}}">Editar</a>    
+                <a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{ id_alumno}}"> Borrar</a>
                 </td>
                 
-                </tr>
-                {{/each}}
+            </tr>
+
+            {{/each}}
             </tbody>
+
         </table>
     </div>
 
-    <script src="/assets/js/bootstrap.js"></script>
+
 
 	<!-- MODAL AGREGAR PRODUCTOS -->
         <form action="/save" method="post">       
@@ -48,9 +65,32 @@
                 </button>
                 </div>
                 <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" name="nombre_alumno" class="form-control nombre_alumno" placeholder="nombre_alumno" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="apellido_alumno" class="form-control apellido_alumno" placeholder="apellido_alumno" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="dni" class="form-control dni" placeholder="dni" required>
+                </div>
                  <div class="form-group">
                     <input type="text" name="colegio" class="form-control colegio" placeholder="colegio" required>
                 </div>
+                 <div class="form-group">
+                    <input type="int" name="curso" class="form-control curso" placeholder="curso" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="turno" class="form-control turno" placeholder="turno" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="materia" class="form-control materia" placeholder="materia" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="nota" class="form-control nota" placeholder="nota" required>
+                </div>
+               
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -77,11 +117,34 @@
                 </button>
                 </div>
                 <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" name="nombre_alumno" class="form-control nombre_alumno" placeholder="nombre_alumno" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="apellido_alumno" class="form-control apellido_alumno" placeholder="apellido_alumno" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="dni" class="form-control dni" placeholder="dni" required>
+                </div>
                 
                 <div class="form-group">
                     <input type="text" name="colegio" class="form-control colegio" placeholder="colegio" required>
                 </div>
                 
+                <div class="form-group">
+                    <input type="text" name="curso" class="form-control curso" placeholder="curso" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" name="turno" class="form-control turno" placeholder="turno" required>
+                </div>
+                  <div class="form-group">
+                    <input type="text" name="materia" class="form-control materia" placeholder="materia" required>
+                </div>
+                <div class="form-group">
+                    <input type="int" name="nota" class="form-control nota" placeholder="nota" required>
+                </div>
+
                 </div>
                 <div class="modal-footer">
                 <input type="hidden" name="id" class="id_alumno">
@@ -130,13 +193,24 @@ $(document).ready(function(){
 
     $('#mytable').on('click', '.edit', function(){
         let id_alumno = $(this).data('id');
+        let nombre_alumno = $(this).data('nombre_alumno');
+        let apellido_alumno = $(this).data('apellido_alumno');
+        let dni = $(this).data('dni');
         let colegio = $(this).data('colegio');
-        
+        let curso = $(this).data('curso');
+        let turno = $(this).data('turno');
+        let materia = $(this).data('materia');
+        let nota = $(this).data('nota');
         $('#EditModal').modal('show');
         $('.id_alumno').val(id_alumno);
-        
+        $('.nombre_alumno').val(nombre_alumno);
+        $('.apellido_alumno').val(apellido_alumno);
+        $('.dni').val(dni);
         $('.colegio').val(colegio);
-        
+        $('.curso').val(curso);
+        $('.turno').val(turno);
+        $('.materia').val(materia);
+        $('.nota').val(nota);
     })
 
 
@@ -150,5 +224,4 @@ $(document).ready(function(){
 </script>
 
 </body>
-
 </html>

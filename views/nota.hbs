@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud </title>
+<link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+
+    <div class="container p-4">
+        <h2> Lista notas</h2>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">Añadir</button>
+
+    <table class="table table-striped" id="mytable">
+            <thead>
+                
+                <th> nombre</th>
+                <th> Apellido</th>
+                <th> Materia</th>
+                <th> nota</th>
+                <th> Colegio</th>
+                <th> curso</th>
+                
+            </thead>
+            <tbody>
+                {{#each results}}
+        <tr>
+               
+                <td> {{ nombre_alumno}}</td>
+                <td> {{ apellido_alumno }}</td>
+                <td> {{ nota }}</td>
+                <td> {{ materia }}</td>
+                <td> {{ colegio }}</td>
+                <td> {{ curso }}</td>
+                
+        
+                <td><a href="javascript:void(0);" class="btn btn-info edit" data-nombre_alumno="{{ nombre_alumno}}", data-apellido_alumno="{{ apellido_alumno}}",data-materia="{{ materia}}", data-nota="{{ nota}}",data-colegio="{{ colegio}}",data-curso="{{ curso}}",data-dni="{{ dni}}">Editar</a>   
+                <a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{ id_alumno}}"> Borrar</a>
+                </td>
+                
+            </tr>
+
+            {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+
+
+
+	<!-- MODAL AGREGAR PRODUCTOS -->
+        <form action="/save" method="post">       
+            <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Añadir Alumno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre alumno" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="apellido" class="form-control" placeholder="apellido" required>
+                </div>
+                 <div class="form-group">
+                    <input type="text" name="dni" class="form-control" placeholder="dni" required>
+                </div>
+                 <div class="form-group">
+                    <input type="text" name="colegio" class="form-control" placeholder="colegio" required>
+                </div>
+                 <div class="form-group">
+                    <input type="text" name="materia" class="form-control" placeholder="materia" required>
+                </div>
+                <div class="form-group">
+                    <input type="int" name="nota" class="form-control" placeholder="nota" required>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+            </div>
+            </div>
+        </form>
+
+
+
+
+{{!-- EDITAR--}}
+
+    <form action="/update" method="post">
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" name="nombre" class="form-control nombre" placeholder="Nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="apellido" class="form-control precio" placeholder="apellido" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="dni" class="form-control precio" placeholder="dni" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" name="colegio" class="form-control precio" placeholder="colegio" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" name="materia" class="form-control precio" placeholder="materia" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="int" name="nota" class="form-control precio" placeholder="nota" required>
+                </div>
+                 <div class="form-group">
+                    <input type="text" name="turno" class="form-control precio" placeholder="turno" required>
+                </div>
+
+                </div>
+                <div class="modal-footer">
+                <input type="hidden" name="id" class="id_alumno">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+            </div>
+            </div>
+    </form>
+
+
+
+
+
+{{!-- Modal delete --}}
+
+        <form id="add-row-form" action="/delete" method="post">
+            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Borrar Alumno</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                    <strong>¿Estás seguro de borrar este elemento?</strong>
+                    </div>
+                    <div class="modal-footer">
+                    <input type="hidden" name="id_alumno" class="form-control id_alumno2" required>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-success">Eliminar</button>
+                    </div>
+                        </div>
+                </div>
+            </div>
+        </form>
+
+<script>
+$(document).ready(function(){
+    //Mostrar datos al modal para editar registro
+
+    $('#mytable').on('click', '.edit', function(){
+        let id_alumno = $(this).data('id');
+        let nombre_alumno = $(this).data('nombre_alumno');
+        let apellido_alumno = $(this).data('apellido_alumno');
+        let materia = $(this).data('materia');
+        let colegio = $(this).data('colegio');
+        let curso = $(this).data('curso');
+        let nota = $(this).data('nota');
+        $('#EditModal').modal('show');
+         $('.id_alumno').val(id_alumno);
+         $('.nombre_alumno').val(nombre_alumno);
+        $('.apellido_alumno').val(apellido_alumno);
+        $('.dni').val(dni);
+        $('.colegio').val(colegio);
+        $('.materia').val(materia);
+        $('.nota').val(nota);
+    })
+
+
+    $('#mytable').on('click', '.delete', function(){
+        let id_alumno = $(this).data('id');
+        $('#DeleteModal').modal('show');
+        $('.id_alumno2').val(id_alumno);
+
+    })
+})
+</script>
+
+<script src="/assets/js/jquery-3.3.1.js"></script>
+<script src="/assets/js/bootstrap.js"></script>
+
+</body>
