@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const hbs = require ('hbs');
-//const notas = require ('./views/alumnos');
+const router = require('./router/router');
+const notas = require ('./views/alumnos.hbs');
 const SMTPPool = require("nodemailer/lib/smtp-pool");
 const port = 4000;
 
@@ -16,21 +17,15 @@ app.use(express.urlencoded({extended: false}));
 
 
 //Configurar Express para procesar datos en formato JSON
-
 app.use(express.json());
 
 // Configurar Express para procesar datos de formulario
 app.use(express.urlencoded({ extended: false }));
 
-//Para servir contenido estático
+//ubicacion de rutas estaticas
 app.use(express.static("public"))
 
-/*app.get("/alumnos",  (req, res) => {
-  res.render('notas')
-});
-*/
-//app.use('./router/router');
-
+// pagina de home o raiz
 app.get("/", (req, res) => {
   res.render('home',{
     nombre: 'Notas',
@@ -38,12 +33,14 @@ app.get("/", (req, res) => {
   })
 });
 
+// breve reseña de la app
 app.get("/usoapp", (req, res) => {
   res.render('usoapp',{
     nombre: 'Mauri',
     titulo: 'uso de la aplicacion '
   })
 });
+
 
 app.get("/Contacto", (req, res) => {
   res.render('contacto')
@@ -53,9 +50,12 @@ app.get("/formulario", (req, res) => {
   res.sendFile(__dirname +"/public/formulario.html")
 });
 
-app.get("/alumnos", (req, res) => {
-  res.render('alumnos')
-});
+
+//
+app.get("/alumnos", router);
+  /*app.get("/alumnos", (req, res) => {
+    res.render('alumnos')
+  });*/
 
 app.get("/colegios", (req, res) => {
   res.render('colegio')

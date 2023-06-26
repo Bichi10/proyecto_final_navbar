@@ -1,6 +1,8 @@
-const { Router } = require ("express");
-const router = new Router();
+//const { Router } = require ("express");
+//const router = new Router();
 const mysql = require ('mysql');
+const express = require('express');
+const router = express.Router();
 
 // Conexión a base de datos
 const conn = mysql.createConnection({
@@ -18,11 +20,11 @@ const conn = mysql.createConnection({
     
     //RUTAS
     // SELECT 
-    router.get('/', (req, res) => {
+    router.get('/alumnos', (req, res) => {
         let sql = "SELECT * FROM notas";
         let query = conn.query(sql, (err, results) => {
         if (err) throw err;
-        res.render('/', {
+        res.render('alumnos', {
             results: results
         });
         });

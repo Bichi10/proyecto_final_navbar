@@ -1,14 +1,17 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud </title>
+    <title>Alumnos</title>
 <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 
 </head>
 <body>
+-->
+{{> header}}
 
     <div class="container p-4" data-bg="banner2.jpg">
         <h2> Lista alumnos</h2>
@@ -19,7 +22,7 @@
                 <th> id Alumno</th>
                 <th> Nombre</th>
                 <th> Apellido</th>
-                <th> DNI</th>
+                <th> dni</th>
                 <th> Colegio</th>
                 <th> curso</th>
                 <th> turno</th>
@@ -39,7 +42,7 @@
                 <td> {{ turno }}</td>
                 <td> {{ materia }}</td>
                 <td> {{ nota }}</td>
-                <td><a href="javascript:void(0);" class="btn btn-info edit" data-id="{{ id_alumno}}" data-nombre_alumno="{{ nombre_alumno}}" data-apellido_alumno="{{ apellido_alumno}}">Editar</a>    
+                <td><a href="javascript:void(0);" class="btn btn-info edit" data-id="{{ id_alumno}}" data-nombre_alumno="{{ nombre_alumno}}", data-apellido_alumno="{{ apellido_alumno}}">Editar</a>    
                 <a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{ id_alumno}}"> Borrar</a>
                 </td>
                 
